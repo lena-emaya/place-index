@@ -23,7 +23,7 @@ noUiSlider.create(slider, {
 
 
 map.on("load", ()=>{
-  map.addSource("bld",{type: "geojson", data: "./data/bld_index.geojson"});
+  map.addSource('bld',{type: 'geojson', data: "https://raw.githubusercontent.com/lena-emaya/place-index/master/data/bld_index.geojson"});
   map.addLayer({
     id: "bld",
     source: "bld",
