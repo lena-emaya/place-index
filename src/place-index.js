@@ -5,11 +5,11 @@ var params = {
 };
 
 mapboxgl.accessToken =
-  "pk.eyJ1IjoidXJiaWNhIiwiYSI6ImNpbnlvMXl4bDAwc293ZGtsZjc3cmV1MWYifQ.ejYUpie2LkrVs_dmQct1jA";
+  "pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ";
 
 var map = new mapboxgl.Map({
     container: "map",
-    style: "mapbox://styles/urbica/cirlzq8g90016gxlz0kijgiwf",
+    style: "mapbox://styles/lenaemaya/cjpjv5ll50l032ss2fo7r6tk0",
     center: [37.554967,55.717137],
     zoom: 12
   });
@@ -22,15 +22,33 @@ map.on("load", ()=>{
     source: "bld",
     type: "fill",
     paint: {
-      "fill-color": {
-        property: "index",
-        type: "exponential",
-        stops: [
-          [0,"#ff0000"],
-          [50,"#00ff00"]
-        ]
-      },
-      "fill-opacity": 0.5
+      "fill-antialias": false,
+      "fill-color": [
+        "interpolate",
+        ["exponential", 1.25],
+        ["get", "index"],
+        1,
+        "#05ff7a",
+        5,
+        "#03ffa2",
+        12,
+        "#01ffca",
+        18,
+        "#00fdf2",
+        24,
+        "#00ddfb",
+        31,
+        "#009cfa",
+        45,
+        "#0044fa",
+        51,
+        "#1400fa",
+        65,
+        "#6c00fa",
+        78,
+        "#c400fa"
+      ],
+      "fill-opacity": 1
     }
   });
 
@@ -130,7 +148,7 @@ setParamValue = (param,value) => {
   d3.select("#slider-transport").on("input", ()=>{ setParamValue("transport",document.getElementById("slider-transport").value); });
 
 
-  fetch('./data/bld_index.geojson')
+  fetch("https://raw.githubusercontent.com/lena-emaya/place-index/master/data/bld_index.geojson")
   .then(function(response) {
     return response.json();
   })
